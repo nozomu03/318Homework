@@ -19,7 +19,7 @@
         <div id="result">결과</div>
     </div>
     <script>
-        function Send() {
+        async function Send() {
             let num1 = $('#num1').val().trim();
             let operator = $('#operator').val().trim();
             let num2 = $('#num2').val().trim();
@@ -27,17 +27,15 @@
                 $("#result").html("입력값 오류");
                 return;
             }
-            $.ajax({
-                url: '/calc/' + num1 + "/" + operator + "/" + num2,
-                type: 'GET',
-                async: true,
-                success: function (response) {
-                    $("#result").html(JSON.stringify(response));
-                },
-                error: function (err) {
-                    $("#result").html(JSON.stringify(err));
-                }
-            });
+            try {
+                let response = await $.get('/calc/' + num1 + "/" + operator + "/" + num2);
+                $("#result").html(JSON.stringify(response));
+            }catch(err){
+                $("#result").html(JSON.stringify(err));
+            }
+            finally {
+                $("#result").html($("#result").html() + "<br>완료");
+            }
         }
     </script>
 </body>

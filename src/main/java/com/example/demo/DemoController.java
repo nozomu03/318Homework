@@ -14,7 +14,7 @@ public class DemoController {
     DemoService ds;
 
     @GetMapping("/calc/{num1}/{operator}/{num2}")
-    public int Calc(@PathVariable String num1, @PathVariable String operator, @PathVariable String num2){
-        return Integer.parseInt(ds.Operating(num1, operator, num2));
+    public String Calc(@PathVariable String num1, @PathVariable String operator, @PathVariable String num2){
+        return (ds.Operating(num1, operator, num2));
     }
 }

@@ -23,6 +23,8 @@ public class DemoServiceImpl implements DemoService{
                 case "/":
                     result = rNum1 / rNum2;
                     break;
+                 default:
+                     throw new Exception();
             }
             return ""+result;
         }catch(Exception e){
