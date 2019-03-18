@@ -36,9 +36,6 @@
                 },
                 error: function (err) {
                     $("#result").html(JSON.stringify(err));
-                },
-                complete: function(){
-                    $("#result").html($("#result").html() + "<br>완료");
                 }
             });
         }
