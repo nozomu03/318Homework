@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script
+            src="http://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous">
+    </script>
+</head>
+<body>
+    <h1>웹프 과제</h1>
+    <div>
+        <input id="num1" placeholder="피연산">
+        <input id="operator" placeholder="연산자">
+        <input id="num2" placeholder="연산">
+        <button onclick="Send()">제출</button>
+        <div id="result">결과</div>
+    </div>
+    <script>
+        function Send() {
+            let num1 = $('#num1').val().trim();
+            let operator = $('#operator').val().trim();
+            let num2 = $('#num2').val().trim();
+            if ((!num1 || num1 == '') || (!num2 || num2 == '') || (!operator || operator == '')) {
+                $("#result").html("입력값 오류");
+                return;
+            }
+            $.ajax({
+                url: '/calc/' + num1 + "/" + operator + "/" + num2,
+                type: 'GET',
+                async: true,
+                success: function (response) {
+                    $("#result").html(JSON.stringify(response));
+                },
+                error: function (err) {
+                    $("#result").html(JSON.stringify(err));
+                },
+                complete: function(){
+                    $("#result").html($("#result").html() + "<br>완료");
+                }
+            });
+        }
+    </script>
+</body>
+</html>
